@@ -1,0 +1,32 @@
+version: 0.1
+log:
+  accesslog:
+    disabled: true
+  fields:
+    service: registry
+  formatter: text
+storage:
+  cache:
+    blobdescriptor: inmemory
+  filesystem:
+    rootdirectory: /var/lib/registry
+  delete:
+    enabled: true
+http:
+  addr: :5000
+  http2:
+    disabled: false
+  headers:
+    X-Content-Type-Options: [nosniff]
+health:
+  storagedriver:
+    enabled: true
+    interval: 15s
+    threshold: 3
+notifications:
+  endpoints:
+    - name: swarm1
+      url: http://192.168.0.111:5000/registry/event
+      timeout: 900ms
+      threshold: 5
+      backoff: 5s
