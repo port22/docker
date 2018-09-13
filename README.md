@@ -14,7 +14,6 @@
 
 In each folder exists a `run.sh` script, which can be used to re-run every service from ground up.
 This `run.sh` script must be executed from this folder, because it relies on `$PWD` to discover the mount paths.
-
 Be careful and inspect every `run.sh` script before you execute, especially adjust the variables in it.
 
 ### Informative
