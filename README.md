@@ -5,6 +5,7 @@
   - `docker swarm init` and `docker swarm join`
 - create a private swarm ingress network under which all services can communicate with each other
   - `docker network create --driver=overlay private`
+- create a CA and wildcard certs for your intranet domain (`ssl/init.sh`) and put the ca.pem in every host's `/etc/docker/certs.d/example.com/ca.crt`
 
 ### Plan your infrastructure 
 - define a network-shared place where the docker definitions are accessible on every machine, like `/opt/docker/`
