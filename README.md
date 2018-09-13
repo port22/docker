@@ -10,7 +10,7 @@
 ### Plan your infrastructure 
 - define a network-shared place where this docker definitions are accessible on every host, like `/opt/docker/`
 - define a place where machine-dependent local data is stored, like `/data`
-- define a network-shared place where machine-independent data is stored (for services not bound to a specific host and not performance-critical), like `/opt/data`
+- define a network-shared place where machine-independent data is stored on every host (for services not bound to a specific host and not performance-critical), like `/opt/data`
 
 In each folder exists a `run.sh` script, which can be used to re-run every service from ground up.
 This `run.sh` script must be executed from this folder, because it relies on `$PWD` to discover the mount paths.
