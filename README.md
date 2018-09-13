@@ -2,7 +2,9 @@
 
 ### Requirements:
 - for redundancy, run three swarm managers (from where all commands are run)
-- create a swarm ingress network: `docker network create --driver=overlay private`
+  - `docker swarm init`
+- create a private swarm ingress network under which all services can communicate with each other
+  - `docker network create --driver=overlay private`
 
 ### Plan your infrastructure 
 - define a network-shared place where the docker definitions are accessible on every machine, like `/opt/docker/`
