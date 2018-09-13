@@ -18,7 +18,7 @@ Be careful and inspect every `run.sh` script before you execute, especially adju
 
 ### Informative
 - Every mount path which will be used with docker swarm must exist on the/any target machine where the service will be running (unlike with legacy standalone containers, the folder will not be created automatically if not exist)
-- You can target services to be run on specific nodes by putting labels in every hosts `/etc/docker/daemon.json`:
+- You can target services to be run on specific nodes by putting labels in every host's `/etc/docker/daemon.json`:
   - single label: `{"labels": ["task=example"]}`
   - multiple labels: `{"labels": ["task=example"],"labels":["arch=amd64"],"labels":["cpu=strong"]}`
 
