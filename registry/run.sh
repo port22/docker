@@ -1,6 +1,6 @@
 #!/bin/bash
 
-BASE_PATH="/opt/docker/registry"
+DATAPATH="/data/registry"
 DOMAIN="registry.example.com"
 
 docker network create driver=overlay registry
@@ -19,8 +19,8 @@ docker service create --name registry \
   --env "REGISTRY_HTTP_ADDR=0.0.0.0:5000" \
   --env "REGISTRY_HTTP_TLS_CERTIFICATE=/run/secrets/wildcard.pem" \
   --env "REGISTRY_HTTP_TLS_KEY=/run/secrets/wildcard.key" \
-  --mount type=bind,source=$BASE_PATH/config.yml,destination=/etc/docker/registry/config.yml \
-  --mount type=bind,source=$BASE_PATH/data,destination=/var/lib/registry \
+  --mount type=bind,source=$PWD/config.yml,destination=/etc/docker/registry/config.yml \
+  --mount type=bind,source=$DATAPATH/data,destination=/var/lib/registry \
   --publish mode=host,target=5000,published=5000 \
   --network registry \
   --label "traefik.enable=true" \
