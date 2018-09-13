@@ -10,6 +10,6 @@ This `run.sh` script must be executed from this folder, because it relies on `$P
 
 Be careful and inspect every `run.sh` script before you execute, especially adjust the variables in it.
 
-### Considerations:
+### Considerations
 - Every mount path which will be used with docker swarm must exist on the/any target machine where the service will be running (unlike with legacy standalone containers, the folder will not be created automatically if not exist)
 
