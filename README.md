@@ -2,7 +2,7 @@
 
 ### Requirements:
 - for redundancy, run three swarm managers (from where all commands are run)
-  - `docker swarm init`
+  - `docker swarm init` and `docker swarm join`
 - create a private swarm ingress network under which all services can communicate with each other
   - `docker network create --driver=overlay private`
 
