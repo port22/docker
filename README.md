@@ -8,7 +8,7 @@
 - create a CA and wildcard certs for your intranet domain (`ssl/init.sh`) and put the ca.pem in every host's `/etc/docker/certs.d/example.com/ca.crt`
 
 ### Plan your infrastructure 
-- define a network-shared place where this docker definitions are accessible on every machine, like `/opt/docker/`
+- define a network-shared place where this docker definitions are accessible on every host, like `/opt/docker/`
 - define a place where machine-dependent local data is stored, like `/data`
 - define a place where machine-independent data is stored (nfs) (for services not bound to a machine and not performance-critical), like `/opt/data`
 
