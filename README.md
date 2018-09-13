@@ -1,5 +1,9 @@
 # Collection of Docker Service Definitions and tools to create a docker swarm cluster
 
+### Requirements:
+- for redundancy, run three swarm managers (from where all commands are run)
+- create a swarm ingress network: `docker network create --driver=overlay private`
+
 ### Plan your infrastructure 
 - define a (preferedly network-shared) place where the docker definitions are stored, like `/opt/docker/`
 - define a place where machine-dependent local data is stored, like `/data`
@@ -10,6 +14,24 @@ This `run.sh` script must be executed from this folder, because it relies on `$P
 
 Be careful and inspect every `run.sh` script before you execute, especially adjust the variables in it.
 
-### Considerations
+### Informative
 - Every mount path which will be used with docker swarm must exist on the/any target machine where the service will be running (unlike with legacy standalone containers, the folder will not be created automatically if not exist)
+
+- You can target services to be run on specific nodes by putting this in every host`s `/etc/docker/daemon.json`:
+
+- single label:
+```
+{"labels": ["task=example"]}
+```
+
+- multiple labels:
+```
+{"labels": ["task=label1"],"labels":["task=label2"]}
+```
+
+Swarm constraint examples:
+
+- Run a service on a specific host: `--constraint 'node.hostname == example'`
+- Run a service on a node with label: `--constraint 'engine.labels.task == example'`
+
 
