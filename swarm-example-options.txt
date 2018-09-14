@@ -15,5 +15,3 @@ docker service create \
   --secret registry.crt \
   --network private \
 docker.io/example
-
-  
