@@ -16,4 +16,7 @@ docker service create \
   --log-opt tag=examplegelftag \
   --secret certificate.pem \
   --network private \
+  --label "traefik.enable=true" \
+  --label "traefik.port=80" \
+  --label traefik.frontend.rule="Host:sub.example.com" \
 docker.io/example
