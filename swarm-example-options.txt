@@ -14,6 +14,6 @@ docker service create \
   --log-driver gelf \
   --log-opt gelf-address=udp://192.168.1.123:12201 \
   --log-opt tag=examplegelftag \
-  --secret registry.crt \
+  --secret certificate.pem \
   --network private \
 docker.io/example
