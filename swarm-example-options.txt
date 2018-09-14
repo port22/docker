@@ -1,0 +1,19 @@
+docker service create \
+  --name example \
+  # --mode=global \
+  # --mode=replicated --replicas 3 \
+  # --constraint 'engine.labels.task == example' \
+  # --constraint 'node.hostname == examplehost' \
+  # --publish mode=host,target=8000,published=80 \
+  # --publish target=8000,published=80 \
+  --restart-condition=on-failure \
+  --env "ES_JAVA_OPTS=-Xms512m -Xmx512m" \
+  --mount type=bind,source=/data,destination=/data \
+  --log-driver gelf \
+  --log-opt gelf-address=udp://192.168.1.123:12201 \
+  --log-opt tag=examplegelftag \
+  --secret registry.crt \
+  --network private \
+docker.io/example
+
+  
