@@ -3,7 +3,7 @@
 DATAPATH="/data/registry"
 DOMAIN="registry.example.com"
 
-docker network create driver=overlay private
+docker network create --driver=overlay private
 
 docker service rm registry
 
