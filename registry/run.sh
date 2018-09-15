@@ -3,8 +3,10 @@
 DATAPATH="/data/registry"
 DOMAIN="registry.example.com"
 
-docker network create driver=overlay registry
+docker network create driver=overlay private
+
 docker service rm registry
+
 docker secret rm wildcard.pem wildcard.key
 docker secret create wildcard.pem ../ssl/wildcard.pem
 docker secret create wildcard.key ../ssl/wildcard.key
@@ -20,8 +22,10 @@ docker service create --name registry \
   --mount type=bind,source=$PWD/config.yml,destination=/etc/docker/registry/config.yml \
   --mount type=bind,source=$DATAPATH,destination=/var/lib/registry \
   --publish mode=host,target=5000,published=5000 \
-  --network registry \
+  --network traefik \
+  --network private \
   --label "traefik.enable=true" \
   --label "traefik.port=5000" \
-  --label traefik.frontend.rule="Host:$DOMAIN" \
+  --label "traefik.frontend.rule=Host:$DOMAIN" \
+  --label "traefik.docker.network=traefik" \
 docker.io/registry:2
