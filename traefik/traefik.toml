@@ -13,8 +13,8 @@ defaultEntryPoints = ["http", "https"]
     [entryPoints.https.tls]
       minVersion = "VersionTLS1"
       [[entryPoints.https.tls.certificates]]
-      CertFile = "/ssl/rdb.pem"
-      KeyFile = "/ssl/rdb.key"
+      CertFile = "/ssl/wildcard.pem"
+      KeyFile = "/ssl/wildcard.key"
 
 [docker]
 endpoint = "unix:///var/run/docker.sock"
@@ -23,11 +23,11 @@ exposedbydefault = true
 swarmMode = true
 
 ## LetsEncrypt
-#[acme]
-#email = "acme@example.com"
-#storage = "/etc/traefik/acme/acme.json"
-#entryPoint = "https"
-#onHostRule = true
+[acme]
+email = "acme@example.com"
+storage = "/etc/traefik/acme/acme.json"
+entryPoint = "https"
+onHostRule = true
 
 [acme.httpChallenge]
 entryPoint = "http"
