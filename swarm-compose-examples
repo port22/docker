@@ -1,0 +1,41 @@
+version: '3.6'
+
+services:
+  reverseproxy:
+    image: nginx:alpine
+    networks:
+      - private
+    environment:
+      - EXAMPLE=example
+    deploy:
+      replicas: 1
+      placement:
+        constraints:
+          - engine.labels.task == frontend
+      update_config:
+        parallelism: 1
+        delay: 30s
+      restart_policy:
+        condition: on-failure
+        max_attempts: 2
+        window: 30s
+      labels:
+        - "traefik.enable=true"
+        - "traefik.port=80"
+        - "traefik.frontend.rule=HostRegexp:{subdomain:.+}.example.com,example.com"
+    depends_on:
+      - service1
+    volumes:
+      - path/to/src:/path/to/target
+    ports:
+      - target: 80
+        published: 888
+        protocol: tcp
+        mode: host
+      - target: 80
+        published: 889
+        protocol: tcp
+        mode: ingress
+      - "9090-9099:8080-8089"
+      - "6060:6060/udp"
+      - "127.0.0.1:5000-5010:5000-5010"
