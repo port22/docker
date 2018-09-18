@@ -1,0 +1,9 @@
+concurrent = 1
+check_interval = 0
+
+[[runners]]
+  name = "docker"
+  url = "https://git.example.com/"
+  token = "4cFwXC_eMzj-xsqvqwq"
+  executor = "shell"
+  [runners.cache]
