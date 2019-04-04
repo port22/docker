@@ -28,11 +28,10 @@ email = "acme@example.com"
 storage = "/etc/traefik/acme/acme.json"
 entryPoint = "https"
 onHostRule = true
-
 [acme.httpChallenge]
 entryPoint = "http"
 
 [api]
 entryPoint = "traefik"
 dashboard = true
-debug = true
+debug = false
