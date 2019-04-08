@@ -1,4 +1,5 @@
-#!/bin/bash
+
+```#!/bin/bash
 
 IMAGE=""
 SERVICE="squid"
@@ -11,3 +12,4 @@ docker service create --with-registry-auth --detach --name $SERVICE \
   --mount type=bind,source=$PWD/auth,destination=/auth \
   --publish mode=ingress,published=3128,target=3128 \
 $IMAGE
+```
