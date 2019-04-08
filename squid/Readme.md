@@ -1,4 +1,5 @@
-```#!/bin/bash
+```
+#!/bin/bash
 
 IMAGE=""
 SERVICE="squid"
