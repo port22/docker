@@ -6,6 +6,8 @@ docker stack deploy -c docker-compose.yml redis
 
 Bootstrap the cluster
 
+_info: replicas have a prefix of 2 on the port
+
 ```
 NODE1: 1.2.3.4
 NODE2: 1.2.3.5
