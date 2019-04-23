@@ -9,12 +9,11 @@ x-global: &global
     hostnet: {}
   volumes:
     - redis:/data
-  command:
-    - 'redis-server'
-    - '--port ${PORT}'
-    - '--cluster-enabled yes'
-    - '--cluster-config-file nodes.conf'
-    - '--appendonly yes'
+  entrypoint: >
+    sh -c "redis-server --port $${PORT}
+    --cluster-enabled yes
+    --cluster-config-file nodes.conf
+    --appendonly yes"
 
 services:
   cache:
