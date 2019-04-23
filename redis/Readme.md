@@ -1,10 +1,10 @@
-#Deploy the Stack
+Deploy the Stack
 
 ```
 docker stack deploy -c docker-compose.yml redis
 ```
 
-#Bootstrap the cluster
+Bootstrap the cluster
 
 ```
 NODE1: 1.2.3.4
