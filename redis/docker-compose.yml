@@ -1,14 +1,14 @@
 version: "3.6"
 
 x-global: &global
+  image: docker.io/redis:latest
   hostname: "{{.Node.Hostname}}"
   deploy:
     mode: global
   networks:
     hostnet: {}
   volumes:
-      - {{.Service.Name}}:/data
-  image: docker.io/redis:latest
+    - redis:/data
   command:
     - 'redis-server'
     - '--port ${PORT}'
@@ -26,6 +26,16 @@ services:
     <<: *global
     environmant:
       PORT: 26379
+      
+  cms:
+    <<: *global
+    environmant:
+      PORT: 6379
+
+  cms_slave:
+    <<: *global
+    environmant:
+      PORT: 26379
 
 networks:
   hostnet:
@@ -33,5 +43,5 @@ networks:
     name: host
 
 volumes:
-  cache:
-  cache_slave:
+  redis:
+    name: '{{.Service.Name}}'
