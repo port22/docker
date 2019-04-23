@@ -4,7 +4,7 @@ Deploy the Stack
 docker stack deploy -c docker-compose.yml redis
 ```
 
-*Bootstrap the cluster
+Bootstrap the cluster
 
 info: replicas have a prefix of 2 on the port
 
