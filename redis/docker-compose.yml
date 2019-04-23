@@ -1,0 +1,37 @@
+version: "3.6"
+
+x-global: &global
+  hostname: "{{.Node.Hostname}}"
+  deploy:
+    mode: global
+  networks:
+    hostnet: {}
+  volumes:
+      - {{.Service.Name}}:/data
+  image: docker.io/redis:latest
+  command:
+    - 'redis-server'
+    - '--port ${PORT}'
+    - '--cluster-enabled yes'
+    - '--cluster-config-file nodes.conf'
+    - '--appendonly yes'
+
+services:
+  cache:
+    <<: *global
+    environmant:
+      PORT: 6379
+
+  cache_slave:
+    <<: *global
+    environmant:
+      PORT: 26379
+
+networks:
+  hostnet:
+    external: true
+    name: host
+
+volumes:
+  cache:
+  cache_slave:
