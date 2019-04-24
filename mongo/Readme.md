@@ -11,6 +11,11 @@ Deploy Mongo Services:
 docker stack deploy -c docker-compose.yml mongo
 ```
 
+Connect to one of the mongo instances:
+```
+docker exec -it mongo_mongo1.1.ymdh7w3rvxp6f5yiitjk2w3n3 mongo
+```
+
 Manually initiate replicaSet:
 ```
 rs.initiate( {
