@@ -27,6 +27,10 @@ rs.initiate( {
    ]
 })
 ```
+Check status:
+```
+rs.status()
+```
 
 Shutdown Stack:
 ```
