@@ -6,7 +6,7 @@ docker node update --label-add rocketchat_mongo2=true swarm2
 docker node update --label-add rocketchat_mongo3=true swarm3
 ```
 
-Deploy Mongo Services:
+Deploy Mongo Stack:
 ```
 docker stack deploy -c docker-compose.yml mongo
 ```
