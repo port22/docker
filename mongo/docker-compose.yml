@@ -1,0 +1,32 @@
+version: "3.6"
+
+x-mongo: &mongo
+  image: docker.io/mongo:3
+  hostname: '{{.Service.Name}}'
+  volumes:
+    - mongo:/data/db
+  command: mongod --replSet rs0
+
+services:
+
+  mongo1:
+    <<: *mongo
+    deploy:
+      placement:
+        constraints: [node.labels.mongo1 == true]
+
+  mongo2:
+    <<: *mongo
+    deploy:
+      placement:
+        constraints: [node.labels.mongo2 == true]
+
+  mongo3:
+    <<: *mongo
+    deploy:
+      placement:
+        constraints: [node.labels.mongo3 == true]
+
+volumes:
+  mongo:
+    name: '{{.Service.Name}}'
