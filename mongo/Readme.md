@@ -1,9 +1,9 @@
 
 Add Labels to desired nodes:
 ```
-docker node update --label-add rocketchat_mongo1=true swarm1
-docker node update --label-add rocketchat_mongo2=true swarm2
-docker node update --label-add rocketchat_mongo3=true swarm3
+docker node update --label-add mongo1=true swarm1
+docker node update --label-add mongo2=true swarm2
+docker node update --label-add mongo3=true swarm3
 ```
 
 Deploy Mongo Stack:
