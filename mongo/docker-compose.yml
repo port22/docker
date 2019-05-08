@@ -27,6 +27,12 @@ services:
       placement:
         constraints: [node.labels.mongo3 == true]
 
+  arbiter:
+    <<: *mongo
+    deploy:
+      placement:
+        constraints: [node.labels.mongo_arbiter == true]
+
 volumes:
   mongo:
     name: '{{.Service.Name}}'
