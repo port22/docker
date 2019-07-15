@@ -4,6 +4,7 @@ docker stack rm consul
 ```
 
 ```
+export DOMAIN=example.com
 docker stack deploy -c ./docker-compose.yml consul
 ```
 
