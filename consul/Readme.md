@@ -1,7 +1,4 @@
 
-```
-docker stack rm consul 
-```
 
 ```
 export DOMAIN=example.com
