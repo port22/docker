@@ -1,0 +1,69 @@
+version: '3.6'
+
+x-consul: &consul
+  image: consul:latest
+  depends_on:
+    - bootstrap
+  networks:
+    - traefik
+    - default
+  command: "agent -server -retry-join consul1 -client 0.0.0.0 -bind '{{ GetInterfaceIP \"eth0\" }}' -ui"
+  volumes:
+    - /auto/docker/consul/data_{{.Node.Hostname}}:/consul/data
+    - /auto/docker/consul/config_{{.Node.Hostname}}:/consul/config
+
+services:
+
+  consul1:
+    <<: *consul
+    hostname: consul1
+    command: "agent -server -bootstrap-expect 5 -client 0.0.0.0 -bind '{{ GetInterfaceIP \"eth0\" }}'"
+    deploy:
+      placement:
+        constraints: [node.hostname == swarm1]
+
+  consul2:
+    <<: *consul
+    hostname: consul2
+    deploy:
+      placement:
+        constraints: [node.hostname == swarm2]
+      labels:
+        - "traefik.port=8500"
+        - "traefik.frontend.rule=Host:consul.$DOMAIN"
+
+  consul3:
+    <<: *consul
+    hostname: consul3
+    deploy:
+      placement:
+        constraints: [node.hostname == swarm3]
+      labels:
+        - "traefik.port=8500"
+        - "traefik.frontend.rule=Host:consul.$DOMAIN"
+
+  consul4:
+    <<: *consul
+    hostname: consul4
+    deploy:
+      placement:
+        constraints: [node.hostname == swarm4]
+      labels:
+        - "traefik.port=8500"
+        - "traefik.frontend.rule=Host:consul.$DOMAIN"
+
+  consul5:
+    <<: *consul
+    hostname: consul5
+    deploy:
+      placement:
+        constraints: [node.hostname == swarm5]
+      labels:
+        - "traefik.port=8500"
+        - "traefik.frontend.rule=Host:consul.$DOMAIN"
+
+networks:
+  default:
+  traefik:
+    external: true
+    name: traefik
