@@ -26,6 +26,18 @@ services:
     deploy:
       placement:
         constraints: [node.labels.mongo3 == true]
+        
+  mongo4:
+    <<: *mongo
+    deploy:
+      placement:
+        constraints: [node.labels.mongo4 == true]
+        
+  mongo5:
+    <<: *mongo
+    deploy:
+      placement:
+        constraints: [node.labels.mongo5 == true]        
 
   arbiter:
     <<: *mongo
