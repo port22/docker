@@ -4,7 +4,9 @@ Add Labels to desired nodes:
 docker node update --label-add mongo1=true swarm1
 docker node update --label-add mongo2=true swarm2
 docker node update --label-add mongo3=true swarm3
-docker node update --label-add mongo_arbiter=true swarm4
+docker node update --label-add mongo3=true swarm4
+docker node update --label-add mongo3=true swarm5
+#docker node update --label-add mongo_arbiter=true swarm4
 ```
 
 Deploy Mongo Stack:
@@ -25,6 +27,8 @@ rs.initiate( {
       { _id: 0, host: "mongo1:27017" },
       { _id: 1, host: "mongo2:27017" },
       { _id: 2, host: "mongo3:27017" }
+      { _id: 3, host: "mongo4:27017" }
+      { _id: 4, host: "mongo5:27017" }      
    ]
 })
 ```
