@@ -1,0 +1,65 @@
+version: "3.6"
+
+x-global: &global
+  deploy:
+    update_config:
+      parallelism: 1
+      delay: 20s
+      order: stop-first
+  image: ${MYSQL_IMAGE}
+  ports:
+      - target: 3306
+        published: 3333
+        mode: host
+  volumes:
+    - /var/lib/mysql:/var/lib/mysql
+    - /etc/my.cnf:/etc/my.cnf
+  command: mysqld --user mysql
+
+services:
+
+  mysql1:
+    <<: *global
+    hostname: mysql1
+    deploy:
+      placement:
+        constraints:
+          - node.hostname == swarm1
+
+  mysql2:
+    <<: *global
+    hostname: mysql2
+    deploy:
+      placement:
+        constraints:
+          - node.hostname == swarm2
+
+  mysql3:
+    <<: *global
+    hostname: mysql3
+    deploy:
+      placement:
+        constraints:
+          - node.hostname == swarm3
+
+  router:
+    hostname: mysql
+    deploy:
+      mode: global
+    image: ${MYSQLROUTER_IMAGE}
+    volumes:
+      - /etc/hosts:/etc/hosts:ro
+      - router:/tmp/mysqlrouter
+    ports:
+      - target: 6446
+        published: 3306
+        mode: host
+    environment:
+      MYSQL_HOST: mysql1
+      MYSQL_PORT: 3306
+      MYSQL_USER: root
+      MYSQL_PASSWORD: playWithMe
+      MYSQL_INNODB_CLUSTER_MEMBERS: 3
+
+volumes:
+  router:
