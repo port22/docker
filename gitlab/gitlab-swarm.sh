@@ -10,9 +10,3 @@ docker service create --name gitlab \
   --label "traefik.port=80" \
   --label "traefik.frontend.rule=Host:git.example.com" \
 gitlab/gitlab-ce:latest
-
-docker service create --name gitlab-runner \
-  --mount type=bind,source="$PWD/config.toml",destination="/etc/gitlab-runner/config.toml" \
-  --mount type=bind,source="/etc/hosts",destination="/etc/hosts" \
-  --mount type=bind,source="/var/run/docker.sock",destination="/var/run/docker.sock" \
-gitlab/gitlab-runner:latest
